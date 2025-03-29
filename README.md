@@ -21,35 +21,34 @@ cd data-quality-ecommerce
 
 ### Install Dependencies
 Install the required Python dependencies:
-```bash
 pip install -r requirements.txt
 
-Database Setup
+### Database Setup
 Ensure you have the ecommerce.duckdb file in the project directory. This file should contain the transaction data. If you don’t have the data, you’ll need to load or generate the DuckDB file yourself.
 
-Run the App
+### Run the App
 Once the setup is complete, run the Streamlit app using:
 streamlit run streamlit.py
 You can access the dashboard at http://localhost:8501.
 
-Usage
+### Usage
 Once the application is running:
 - Use the sidebar filters to select the category, payment method, and date range for transactions.
 - View visualizations of transaction status distributions, trends, and daily summaries.
 - Analyze data quality issues such as negative amounts or canceled transactions.
 - The dashboard displays key metrics, including total transactions, total revenue, and average amount.
 
-Running with Docker
+### Running with Docker
 You can also run the application using Docker. Here’s how:
 
-Build the Docker Image:
+### Build the Docker Image:
 docker build -t data-quality-ecommerce-streamlit .
 
-Run the Docker Container:
+### Run the Docker Container:
 docker run -p 8501:8501 data-quality-ecommerce-streamlit
 The app will be available at http://localhost:8501.
 
-Contributing
+### Contributing
 Contributions are welcome! If you'd like to improve this project, follow these steps:
 1.Fork the repository.
 2.Create a new branch (git checkout -b feature-name).
