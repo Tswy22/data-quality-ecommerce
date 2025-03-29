@@ -21,6 +21,7 @@ cd data-quality-ecommerce
 
 ## Install Dependencies
 Install the required Python dependencies:
+```bash
 pip install -r requirements.txt
 
 Database Setup
