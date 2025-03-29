@@ -19,7 +19,7 @@ First, clone the repository:
 git clone https://github.com/Tswy22/data-quality-ecommerce.git
 cd data-quality-ecommerce
 
-Install Dependencies
+## Install Dependencies
 Install the required Python dependencies:
 pip install -r requirements.txt
 
