@@ -5,7 +5,7 @@ import plotly.express as px
 
 conn = duckdb.connect("ecommerce.duckdb")
 if "transactions" not in conn.execute("SHOW TABLES").df()["name"].values:
-    st.error("❌ Table 'transactions' does not exist! Load the data first.")
+    st.error("Table 'transactions' does not exist! Load the data first.")
     st.stop()
 
 @st.cache_data
@@ -116,15 +116,15 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("📊 E-commerce Transaction Dashboard")
+st.title("E-commerce Transaction Dashboard")
 
-st.sidebar.markdown('<div class="sidebar-title">🔍 Filter Transactions</div>', unsafe_allow_html=True)
-category = st.sidebar.selectbox("📌 Select Category", ["All"] + list(df["category"].unique()))
-payment_method = st.sidebar.selectbox("💳 Select Payment Method", ["All"] + list(df["payment_method"].unique()))
-date_range = st.sidebar.date_input("📅 Select Date Range", [])
+st.sidebar.markdown('<div class="sidebar-title">Filter Transactions</div>', unsafe_allow_html=True)
+category = st.sidebar.selectbox("Select Category", ["All"] + list(df["category"].unique()))
+payment_method = st.sidebar.selectbox("Select Payment Method", ["All"] + list(df["payment_method"].unique()))
+date_range = st.sidebar.date_input("Select Date Range", [])
 if not date_range:
     date_range = [df["date"].min(), df["date"].max()]
-st.sidebar.markdown("✅ Use the filters above to refine the data!")
+st.sidebar.markdown("Use the filters above to refine the data!")
 
 filtered_df = df.copy()
 if category != "All":
@@ -165,7 +165,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.subheader("📊 Transaction Status Distribution")
+st.subheader("Transaction Status Distribution")
 status_counts = filtered_df["status"].dropna().value_counts().reset_index()
 status_counts.columns = ["status", "count"]
 
@@ -181,28 +181,28 @@ fig_status = px.bar(
 fig_status.update_xaxes(tickangle=45)
 st.plotly_chart(fig_status, use_container_width=True)
 
-st.subheader("📊 Transaction Status Distribution (Data Table)")
+st.subheader("Transaction Status Distribution (Data Table)")
 st.dataframe(status_counts, use_container_width=True)
 
-st.subheader("📅 Daily Transaction Summary")
+st.subheader("Daily Transaction Summary")
 daily_summary = (
     filtered_df.groupby("date").agg({"transaction_id": "count", "amount": "sum"}).reset_index()
 )
 daily_summary.columns = ["Date", "Transaction Count", "Total Revenue"]
 st.dataframe(daily_summary, use_container_width=True)
 
-st.subheader("⚠️ Transactions with Data Quality Issues")
+st.subheader("Transactions with Data Quality Issues")
 issues_df = filtered_df[(filtered_df["amount"] < 0) | (filtered_df["status"].isin(["void", "cancel"]))] 
 st.dataframe(issues_df, use_container_width=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
-st.subheader("🔍 Data Profiling Results")
+st.subheader("Data Profiling Results")
 st.markdown(f"""
 <div class="info-box">
-❌ Void/Cancel Transactions (without an initial 'paid' transaction): <span style="color:#D72638;">{void_cancel_no_initial}</span>
+Void/Cancel Transactions (without an initial 'paid' transaction): <span style="color:#D72638;">{void_cancel_no_initial}</span>
 </div>
 
 <div class="info-box">
-💸 Transactions with Negative Amount: <span style="color:#D72638;">{negative_amount_count}</span>
+Transactions with Negative Amount: <span style="color:#D72638;">{negative_amount_count}</span>
 </div>
 """, unsafe_allow_html=True) 
