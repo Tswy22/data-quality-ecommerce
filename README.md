@@ -22,6 +22,7 @@ Ensure ecommerce.duckdb exists in the project directory. If missing, generate or
 
 ### 4.Run the App
 streamlit run streamlit.py
+```bash
 Access the dashboard at: http://localhost:8501
 
 Running with Docker
