@@ -41,7 +41,7 @@ docker-compose up --build
 
 2.Access the dashboard: Open your web browser and go to http://localhost:8501.
 
-Data Generation
+### Data Generation
 The data_generation.py file is responsible for generating both historical transaction data and daily transaction data with optional data issues. The following functions are available:
 - generate_transactions: Generates 1,000,000 historical transaction records.
 - simulate_daily_transactions: Simulates daily transaction records for a given number of days.
@@ -50,22 +50,22 @@ To generate the data:
 python data_generation.py
 </code></pre>
 
-Data Storage
+### Data Storage
 The data_storage.py file handles the process of storing transaction data in a DuckDB database. It loads both historical and daily transaction data into separate tables.
 To load the data into DuckDB:
 <pre><code>
 python data_storage.py
 </code></pre>
   
-Data Profiling
+### Data Profiling
 The data_profiling.py file runs queries against the DuckDB database to provide data quality insights. It checks for:
 - Void/Cancel transactions without initial 'paid' status.
 - Negative transaction amounts.
 - The distribution of transaction statuses.
 - Daily transaction trends.
 
-Running the Application
-Streamlit Application:
+## Running the Application
+### Streamlit Application:
 - The streamlit.py file is the core of the dashboard application. It allows users to filter and explore transaction data interactively.
 To run the application, simply run:
 <pre><code>
@@ -78,8 +78,8 @@ The dashboard provides key metrics such as:
 - Transactions with issues
 You can filter the data by category, payment method, and date range.
 
-Docker Configuration
-Dockerfile
+## Docker Configuration
+### Dockerfile
 The Dockerfile creates an image for the Streamlit application, installs dependencies from the requirements.txt file, and exposes port 8501 for the Streamlit dashboard.
-docker-compose.yaml
+### docker-compose.yaml
 The docker-compose.yaml file simplifies the process of building and running the application with Docker. It ensures that the Streamlit application is correctly configured to run in a container.
