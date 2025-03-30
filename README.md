@@ -30,7 +30,7 @@ streamlit run streamlit.py
 </code></pre>
 Access the dashboard at: http://localhost:8501
 
-Running with Docker
+### Running with Docker
 Build & Run the Docker Container
 If you want to run the application inside a Docker container, follow these steps:
 1.Build the Docker image:
