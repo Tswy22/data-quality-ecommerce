@@ -12,7 +12,7 @@ if "transactions" not in conn.execute("SHOW TABLES").df()["name"].values:
 def load_data():
     query = "SELECT * FROM transactions"
     df = conn.execute(query).df()
-    df["date"] = pd.to_datetime(df["date"]).dt.date
+    df["date"] = pd.to_datetime(df["date"]).dt.date  # แปลง timestamp เป็น date
     return df
 
 df = load_data()
@@ -184,18 +184,30 @@ st.plotly_chart(fig_status, use_container_width=True)
 st.subheader("Transaction Status Distribution (Data Table)")
 st.dataframe(status_counts, use_container_width=True)
 
-st.subheader("Daily Transaction Summary")
+# Daily Transaction Trends Graph
+st.subheader("Daily Transaction Trends")
 daily_summary = (
     filtered_df.groupby("date").agg({"transaction_id": "count", "amount": "sum"}).reset_index()
 )
 daily_summary.columns = ["Date", "Transaction Count", "Total Revenue"]
-st.dataframe(daily_summary, use_container_width=True)
+
+fig_daily_trends = px.line(
+    daily_summary, 
+    x="Date", 
+    y="Transaction Count", 
+    title="Daily Transaction Trends", 
+    markers=True
+)
+
+fig_daily_trends.update_xaxes(tickangle=45)
+st.plotly_chart(fig_daily_trends, use_container_width=True)
 
 st.subheader("Transactions with Data Quality Issues")
 issues_df = filtered_df[(filtered_df["amount"] < 0) | (filtered_df["status"].isin(["void", "cancel"]))] 
 st.dataframe(issues_df, use_container_width=True)
 
 st.markdown('</div>', unsafe_allow_html=True)
+
 st.subheader("Data Profiling Results")
 st.markdown(f"""
 <div class="info-box">
@@ -205,4 +217,4 @@ Void/Cancel Transactions (without an initial 'paid' transaction): <span style="c
 <div class="info-box">
 Transactions with Negative Amount: <span style="color:#D72638;">{negative_amount_count}</span>
 </div>
-""", unsafe_allow_html=True) 
+""", unsafe_allow_html=True)
