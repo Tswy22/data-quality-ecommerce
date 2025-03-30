@@ -11,8 +11,10 @@ This project provides an interactive dashboard to visualize and analyze e-commer
 
 ## Installation
 ### 1.Clone the Repository
+<pre><code>
 git clone https://github.com/YourUsername/data-quality-ecommerce.git
 cd data-quality-ecommerce
+</code></pre>
 
 ### 2.Install Dependencies
 pip install -r requirements.txt
@@ -67,4 +69,3 @@ Dockerfile
 The Dockerfile creates an image for the Streamlit application, installs dependencies from the requirements.txt file, and exposes port 8501 for the Streamlit dashboard.
 docker-compose.yaml
 The docker-compose.yaml file simplifies the process of building and running the application with Docker. It ensures that the Streamlit application is correctly configured to run in a container.
-```bash
