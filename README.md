@@ -25,14 +25,18 @@ pip install -r requirements.txt
 Ensure ecommerce.duckdb exists in the project directory. If missing, generate or load the transaction data.
 
 ### 4.Run the App
+<pre><code>
 streamlit run streamlit.py
+</code></pre>
 Access the dashboard at: http://localhost:8501
 
 Running with Docker
 Build & Run the Docker Container
 If you want to run the application inside a Docker container, follow these steps:
 1.Build the Docker image:
+<pre><code>
 docker-compose up --build
+</code></pre>
 2.Access the dashboard: Open your web browser and go to http://localhost:8501.
 
 Data Generation
@@ -40,13 +44,17 @@ The data_generation.py file is responsible for generating both historical transa
 - generate_transactions: Generates 1,000,000 historical transaction records.
 - simulate_daily_transactions: Simulates daily transaction records for a given number of days.
 To generate the data:
+<pre><code>
 python data_generation.py
+</code></pre>
 
 Data Storage
 The data_storage.py file handles the process of storing transaction data in a DuckDB database. It loads both historical and daily transaction data into separate tables.
 To load the data into DuckDB:
+<pre><code>
 python data_storage.py
-
+</code></pre>
+  
 Data Profiling
 The data_profiling.py file runs queries against the DuckDB database to provide data quality insights. It checks for:
 - Void/Cancel transactions without initial 'paid' status.
@@ -58,7 +66,9 @@ Running the Application
 Streamlit Application:
 - The streamlit.py file is the core of the dashboard application. It allows users to filter and explore transaction data interactively.
 To run the application, simply run:
+<pre><code>
 streamlit run streamlit.py
+</code></pre>
 The dashboard provides key metrics such as:
 - Total transactions
 - Total revenue
