@@ -17,8 +17,10 @@ cd data-quality-ecommerce
 </code></pre>
 
 ### 2.Install Dependencies
+<pre><code>
 pip install -r requirements.txt
-
+</code></pre>
+  
 ### 3.Set Up the Database
 Ensure ecommerce.duckdb exists in the project directory. If missing, generate or load the transaction data.
 
