@@ -33,10 +33,12 @@ Access the dashboard at: http://localhost:8501
 ### Running with Docker
 Build & Run the Docker Container
 If you want to run the application inside a Docker container, follow these steps:
+
 1.Build the Docker image:
 <pre><code>
 docker-compose up --build
 </code></pre>
+
 2.Access the dashboard: Open your web browser and go to http://localhost:8501.
 
 Data Generation
