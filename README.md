@@ -1,4 +1,4 @@
-# E-commerce Transaction Dashboard
+# Data Quality in E-commerce Transaction 
 
 This project provides an interactive dashboard to visualize and analyze e-commerce transactions using **Streamlit** and **DuckDB**. The dashboard allows users to explore transaction trends, key metrics, and detect data quality issues with interactive filters.
 
@@ -22,8 +22,12 @@ pip install -r requirements.txt
 </code></pre>
   
 ### 3.Set Up the Database
-Ensure ecommerce.duckdb exists in the project directory. If missing, generate or load the transaction data.
-
+Ensure **ecommerce.duckdb** exists in the project directory. If missing, generate or load the transaction data.
+<pre><code>
+python data_generation.py
+python data_storage.py
+</code></pre>
+  
 ### 4.Run the App
 <pre><code>
 streamlit run streamlit.py
@@ -34,15 +38,22 @@ Access the dashboard at: http://localhost:8501
 ### Build & Run the Docker Container
 If you want to run the application inside a Docker container, follow these steps:
 
-1.Build the Docker image:
+1.Build the Docker image and run the container:
 <pre><code>
 docker-compose up --build
 </code></pre>
 
 2.Access the dashboard: Open your web browser and go to http://localhost:8501.
 
+## Updating Code and Restarting Docker
+If you update the code, rebuild the container with:
+<pre><code>
+docker-compose up --build
+</code></pre>
+
+## Data Management
 ### Data Generation
-The data_generation.py file is responsible for generating both historical transaction data and daily transaction data with optional data issues. The following functions are available:
+The **data_generation.py** file is responsible for generating both historical transaction data and daily transaction data with optional data issues. The following functions are available:
 - generate_transactions: Generates 1,000,000 historical transaction records.
 - simulate_daily_transactions: Simulates daily transaction records for a given number of days.
 To generate the data:
@@ -51,14 +62,14 @@ python data_generation.py
 </code></pre>
 
 ### Data Storage
-The data_storage.py file handles the process of storing transaction data in a DuckDB database. It loads both historical and daily transaction data into separate tables.
+The **data_storage.py** file handles the process of storing transaction data in a DuckDB database. It loads both historical and daily transaction data into separate tables.
 To load the data into DuckDB:
 <pre><code>
 python data_storage.py
 </code></pre>
   
 ### Data Profiling
-The data_profiling.py file runs queries against the DuckDB database to provide data quality insights. It checks for:
+The **data_profiling.py** file runs queries against the DuckDB database to provide data quality insights. It checks for:
 - Void/Cancel transactions without initial 'paid' status.
 - Negative transaction amounts.
 - The distribution of transaction statuses.
@@ -66,11 +77,12 @@ The data_profiling.py file runs queries against the DuckDB database to provide d
 
 ## Running the Application
 ### Streamlit Application:
-- The streamlit.py file is the core of the dashboard application. It allows users to filter and explore transaction data interactively.
+- The **streamlit.py** file is the core of the dashboard application. It allows users to filter and explore transaction data interactively.
 To run the application, simply run:
 <pre><code>
 streamlit run streamlit.py
 </code></pre>
+
 The dashboard provides key metrics such as:
 - Total transactions
 - Total revenue
@@ -80,6 +92,6 @@ You can filter the data by category, payment method, and date range.
 
 ## Docker Configuration
 ### Dockerfile
-The Dockerfile creates an image for the Streamlit application, installs dependencies from the requirements.txt file, and exposes port 8501 for the Streamlit dashboard.
+The **Dockerfile** creates an image for the Streamlit application, installs dependencies from the **requirements.txt** file, and exposes port 8501 for the Streamlit dashboard.
 ### docker-compose.yaml
-The docker-compose.yaml file simplifies the process of building and running the application with Docker. It ensures that the Streamlit application is correctly configured to run in a container.
+The **docker-compose.yaml** file simplifies the process of building and running the application with Docker. It ensures that the Streamlit application is correctly configured to run in a container.
